@@ -34,6 +34,7 @@ jobs:
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
  
   deployIaC:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
