@@ -12,7 +12,6 @@ env:
 
 jobs:
   build:
-    needs: deployIaC
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
@@ -33,6 +32,7 @@ jobs:
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+ 
   deployIaC:
     runs-on: ubuntu-latest
     steps:
