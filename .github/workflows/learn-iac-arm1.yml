@@ -46,9 +46,10 @@ jobs:
       - name: Deploy ARM template
         uses: Azure/CLI@v1
         with:
-          azcliversion: 2.0.72
           inlineScript: |
-            az deployment group create --resource-group rg-learn-iac-arm --template-file infra/vsDeploy/azuredeploy.json --parameters infra/vsDeploy/azuredeploy.parameters.json
+            ls -la
+            cd infra/vsDeploy
+            az deployment group create --resource-group rg-learn-iac-arm --template-file WebSite.json --parameters WebSite.parameters.json
         
   deploy:
     runs-on: windows-latest
