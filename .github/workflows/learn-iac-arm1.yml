@@ -1,14 +1,15 @@
-name: Build and deploy learn-iac-arm
+name: Build and deploy .NET Core application to Web App learn-iac-arm
 on:
   push:
     branches:
-    - 01-10b
+    - 01-10e
 env:
   AZURE_WEBAPP_NAME: learn-iac-arm
   AZURE_WEBAPP_PACKAGE_PATH: src\myApp\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: src\myApp
+
 jobs:
   build:
     runs-on: windows-latest
@@ -31,10 +32,31 @@ jobs:
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+ 
+  deployIaC:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Login to Azure
+      - name: Login via Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # Deploy ARM template
+      - name: Deploy ARM template
+        uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            cd infra/vsDeploy
+            az deployment group create --resource-group rg-learn-azure-IaC --template-file WebSite.json --parameters WebSite.parameters.json
         
+
   deploy:
     runs-on: windows-latest
-    needs: build
+    needs: 
+    - build
+    - deployIaC
     steps:
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
