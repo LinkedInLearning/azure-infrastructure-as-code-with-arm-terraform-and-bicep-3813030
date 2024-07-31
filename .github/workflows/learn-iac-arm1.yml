@@ -33,18 +33,27 @@ jobs:
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
 
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Deploy ARM Template
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          ls -la
+          az deployment group create \
+          --resource-group ${{ env.RG_NAME }} \
+          --template-file infra/vsDeploy/WebSite.json \
+          --parameters infra/vsDeploy/WebSite.parameters.json
+        
     - name: Publish Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-    
-    - name: Publish Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: IaC
-        path: ${{ env.WORKING_DIRECTORY }}/infra/vsDeploy
-       
+          
   deploy:
     runs-on: windows-latest
     needs: build
@@ -55,26 +64,6 @@ jobs:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v3
-      with:
-        name: IaC
-        path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-  
-    - name: Log in to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Deploy ARM Template
-      uses: azure/CLI@v1
-      with:
-        inlineScript: |
-          ls -la
-          az deployment group create \
-            --resource-group ${{ env.RG_NAME }} \
-            --template-file infra/vsDeploy/WebSite.json \
-            --parameters infra/vsDeploy/WebSite.parameters.json
 
     - name: Deploy to Azure WebApp
       uses: azure/webapps-deploy@v2
