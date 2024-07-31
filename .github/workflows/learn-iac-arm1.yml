@@ -1,8 +1,8 @@
-name: Build and deploy .NET Core application to Web App learn-iac-arm
+name: Deploy learn-iac-arm
 on:
   push:
     branches:
-    - 01-08e
+    - 01-10e
 env:
   AZURE_WEBAPP_NAME: learn-iac-arm
   AZURE_WEBAPP_PACKAGE_PATH: src\myApp\published
