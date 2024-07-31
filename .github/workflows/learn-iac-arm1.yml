@@ -48,9 +48,7 @@ jobs:
         uses: Azure/CLI@v1
         with:
           inlineScript: |
-            az account show
             cd infra/vsDeploy
-            ls -la
             az deployment group create --resource-group rg-learn-azure-IaC --template-file WebSite.json --parameters WebSite.parameters.json
         
 
