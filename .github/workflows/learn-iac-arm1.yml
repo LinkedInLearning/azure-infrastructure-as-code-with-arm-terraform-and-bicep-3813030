@@ -26,9 +26,9 @@ jobs:
         with:
           inlineScript: |
             az account show
-            ls -la
             cd infra/vsDeploy
-            az deployment group create --resource-group rg-learn-iac-arm --template-file WebSite.json --parameters WebSite.parameters.json
+            ls -la
+            az deployment group create --resource-group rg-learn-azure-IaC --template-file WebSite.json --parameters WebSite.parameters.json
         
   build:
     needs: deployIaC
