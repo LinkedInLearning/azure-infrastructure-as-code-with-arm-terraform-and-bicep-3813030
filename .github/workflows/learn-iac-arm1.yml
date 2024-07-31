@@ -47,8 +47,9 @@ jobs:
         uses: Azure/CLI@v1
         with:
           inlineScript: |
-            ls -la
             cd infra/vsDeploy
+            ls -la
+            az account show -o table
             az deployment group create --resource-group rg-learn-iac-arm --template-file WebSite.json --parameters WebSite.parameters.json
         
   deploy:
