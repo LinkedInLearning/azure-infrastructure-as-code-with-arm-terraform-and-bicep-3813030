@@ -3,10 +3,11 @@ node_modules
 .tmp
 npm-debug.log
 
+# Dev Ingnore Files
 bin
 obj
 .vs
-.suo
 *.user
+*.suo
 PublishProfiles
 ServiceDependencies
