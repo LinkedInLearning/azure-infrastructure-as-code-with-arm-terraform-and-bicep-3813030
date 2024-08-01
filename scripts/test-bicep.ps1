@@ -6,7 +6,7 @@ az account show -o table
 
 ## Set Variables
 $appName = "azIaC"
-$envName = "arm"
+$envName = "bicep"
 $loc = "westus"
 
 az bicep --help
