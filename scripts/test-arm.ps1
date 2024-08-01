@@ -21,6 +21,9 @@ az deployment group create --what-if -g $rgName --template-file ./infra/arm/mySi
 az deployment group create -g $rgName --template-file ./infra/arm/mySite.json `
   --parameters ./infra/arm/mySite.parameters.json
 
+## Create Template Spec
+az ts create --name mySite -g $rgName --template-file ./infra/arm/mySite.json --version "1.0"
+az ts list -o table
 
 ## Deploy Code
 $planName = "$appName-$envName-plan"
