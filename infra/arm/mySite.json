@@ -69,5 +69,14 @@
             ]
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "siteName": {
+            "type": "string",
+            "value": "[variables('siteName')]"
+        },
+        "planName": {
+            "type": "string",
+            "value": "[variables('planName')]"
+        }
+    }
 }

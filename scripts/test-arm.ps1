@@ -29,5 +29,13 @@ az ts list -o table
 $planName = "$appName-$envName-plan"
 $siteName = "$appName-$envName-site"
 
+## Use Output
+$deploy = az deployment group create -g $rgName --template-file ./infra/arm/mySite.json `
+  --parameters ./infra/arm/mySite.parameters.json
+
+$planName = ($deploy | ConvertFrom-Json).properties.outputs.planName.value
+$siteName = ($deploy | ConvertFrom-Json).properties.outputs.siteName.value
+
+
 cd src/myapp
 az webapp up -g $rgName --plan $planName --name $siteName  --launch-browser
