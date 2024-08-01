@@ -1,4 +1,4 @@
-# WGC - Naming Standards
+# Naming Standards
 
 [Home](wgc.md) | [Naming](wgcNaming.md) | [Tagging](wgcTagging.md) 
 
