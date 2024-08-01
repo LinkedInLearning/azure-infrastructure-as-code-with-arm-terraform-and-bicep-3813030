@@ -15,9 +15,6 @@ resource plan 'Microsoft.Web/serverfarms@2023-01-01' = {
   tags: {
     displayName: planName
   }
-  properties: {
-    name: planName
-  }
 }
 
 resource site 'Microsoft.Web/sites@2020-12-01' = {
