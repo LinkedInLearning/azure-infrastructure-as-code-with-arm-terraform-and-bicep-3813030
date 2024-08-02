@@ -9,5 +9,9 @@ obj
 .vs
 *.user
 *.suo
-/src/myApp/Properties/PublishProfiles
-/src/myApp/Properties/ServiceDependencies/myApp20240730164933 - Web Deploy
+PublishProfiles
+ServiceDependencies
+
+.terraform*
+*.tfstate
+*.tfplan

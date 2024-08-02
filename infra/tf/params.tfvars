@@ -1,0 +1,2 @@
+appName = "azIaC"
+color = "purple"
