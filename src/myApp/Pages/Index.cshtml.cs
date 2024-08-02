@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace myApp.Pages;
 
+
 public class IndexModel : PageModel
 {
+	// IndexModel class definition 
     private readonly ILogger<IndexModel> _logger;
 	private readonly IWebHostEnvironment _env;
 	private readonly IConfiguration _config;
@@ -32,5 +34,4 @@ public class IndexModel : PageModel
 			HtmlContent = $"No content found at {filePath}";
 		}
 	}
-
 }
