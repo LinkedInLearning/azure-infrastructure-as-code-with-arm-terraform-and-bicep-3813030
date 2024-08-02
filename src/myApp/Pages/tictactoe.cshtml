@@ -1,0 +1,110 @@
+@page
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+    <style>
+        .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 10px; margin: 20px; }
+        .cell { width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; border: 2px solid #333; font-size: 24px; cursor: pointer; }
+        .scoreboard { margin: 20px; font-size: 20px; }
+    </style>
+</head>
+<body>
+    <div class="scoreboard">
+        <p>Wins: <span id="wins">0</span></p>
+        <p>Losses: <span id="losses">0</span></p>
+        <p>Draws: <span id="draws">0</span></p>
+    </div>
+    <div class="board" id="board"></div>
+    <button onclick="resetGame()">Reset Game</button>
+
+    <script>
+        const board = document.getElementById('board');
+        const wins = document.getElementById('wins');
+        const losses = document.getElementById('losses');
+        const draws = document.getElementById('draws');
+
+        let cells = [];
+        let currentPlayer = 'X'; // Player is X, Computer is O
+        let gameOver = false;
+        let score = { X: 0, O: 0, draws: 0 };
+
+        function createBoard() {
+            board.innerHTML = '';
+            cells = [];
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.addEventListener('click', () => playerMove(cell, i));
+                board.appendChild(cell);
+                cells.push(cell);
+            }
+        }
+
+        function playerMove(cell, index) {
+            if (!cell.textContent && !gameOver) {
+                cell.textContent = currentPlayer;
+                checkGameStatus();
+                if (!gameOver) {
+                    computerMove();
+                }
+            }
+        }
+
+        function computerMove() {
+            let available = cells.filter(cell => !cell.textContent);
+            if (available.length > 0) {
+                const choice = available[Math.floor(Math.random() * available.length)];
+                choice.textContent = 'O';
+                checkGameStatus();
+            }
+        }
+
+        function checkGameStatus() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            let boardFull = true;
+            winPatterns.forEach(pattern => {
+                const values = pattern.map(index => cells[index].textContent);
+                const winning = values.every(value => value && value === values[0]);
+                if (winning) {
+                    gameOver = true;
+                    updateScore(values[0]);
+                }
+                if (values.includes("")) boardFull = false;
+            });
+
+            if (boardFull && !gameOver) {
+                gameOver = true;
+                score.draws++;
+                draws.textContent = score.draws;
+            }
+        }
+
+        function updateScore(winner) {
+            if (winner === 'X') {
+                score.X++;
+                wins.textContent = score.X;
+            } else {
+                score.O++;
+                losses.textContent = score.O;
+            }
+        }
+
+        function resetGame() {
+            gameOver = false;
+            currentPlayer = 'X';
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
