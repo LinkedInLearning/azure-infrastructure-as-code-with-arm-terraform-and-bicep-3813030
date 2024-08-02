@@ -1,0 +1,3 @@
+config:
+  azure-native:location: westus
+  azure:location: Westus
