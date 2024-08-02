@@ -1,0 +1,26 @@
+- hosts: localhost
+  connection: local
+  vars:
+    resource_group: rg-azIaC-ansible
+    webapp_name: azIaC-ansible-site
+    plan_name: azIaC-ansible-plan
+    location: centralus
+  tasks:
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: "{{ resource_group }}"
+        location: "{{ location }}"
+  
+    - name: Create App Service on Linux with DotNet Runtime
+      azure_rm_webapp:
+        resource_group: "{{ resource_group }}"
+        name: "{{ webapp_name }}"
+        plan:
+          resource_group: "{{ resource_group }}"
+          name: "{{ plan_name }}"
+          is_linux: true
+          sku: S1
+          number_of_workers: 1
+        frameworks:
+        - name: "dotnetcore"
+          version: "8.0"
