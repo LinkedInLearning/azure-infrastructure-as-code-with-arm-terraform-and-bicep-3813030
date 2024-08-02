@@ -13,5 +13,5 @@ PublishProfiles
 ServiceDependencies
 
 .terraform*
-*.tfstate
-*.tfplan
+*tfstate*
+*tfplan*
