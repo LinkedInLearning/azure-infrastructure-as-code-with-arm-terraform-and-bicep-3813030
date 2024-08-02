@@ -7,20 +7,42 @@ param envName string
 param loc string = 'westus'
 
 var rgName = 'rg-${appName}-${envName}'
+var planName = '${appName}-${envName}-plan'
+var list = [
+  {
+    name: 'dev'
+    color: 'lightblue'
+  }
+  {
+    name: 'qa'
+    color: 'lightyellow'
+  }
+  {
+    name: 'prd'
+    color: 'lightgreen'
+  }
+]
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
   name: rgName
   location: loc
 }
 
-module mySite 'mySite.bicep' = {
+module myPlan 'myPlan.bicep' = {
   scope: rg
-  name: 'mySite-deploy'
+  name: planName
   params: {
-    appName: appName
-    envName: envName
+    planName: planName
   }
 }
 
-output siteName string = mySite.outputs.siteName
-output planName string = mySite.outputs.planName
+module sites 'mySite.bicep' = [for item in list: {
+  scope: rg
+  name: '${appName}-${item.name}'
+  params: {
+    envName: item.name
+    color: item.color
+    siteName: '${appName}-${item.name}'
+    planId: myPlan.outputs.planId
+  }
+}]
