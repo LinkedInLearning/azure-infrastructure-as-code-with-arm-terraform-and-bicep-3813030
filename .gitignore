@@ -2,3 +2,12 @@
 node_modules
 .tmp
 npm-debug.log
+
+# Dev Ingnore Files
+bin
+obj
+.vs
+*.user
+*.suo
+/src/myApp/Properties/PublishProfiles
+/src/myApp/Properties/ServiceDependencies/myApp20240730164933 - Web Deploy
