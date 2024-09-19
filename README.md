@@ -1,6 +1,12 @@
 # Azure Infrastructure as Code with ARM, Terraform, and Bicep
 This is the repository for the LinkedIn Learning course `Azure Infrastructure as Code with ARM, Terraform, and Bicep`. The full course is available from [LinkedIn Learning][lil-course-url].
 
+![lil-thumbnail-url]
+
+## Course Description
+
+Looking to learn more about the power of infrastructure as code (IaC)? Join instructor Mike Benkovich as he provides an in-depth exploration of managing Microsoft Azure infrastructure using IaC tools. This course covers the core concepts and skills required to leverage tools such as Azure CLI, ARM, and Bicep, as well as third-party options like Terraform and Pulumi. Test out your newly acquired skills along the way with hands-on demonstrations and practical exercises in GitHub. This course is designed for anyone who already has a basic understanding of cloud concepts in Azure but is still new or relatively inexperienced with IaC in an Azure environment. By the end of this course, you’ll also have a better understanding of the impact of AI on IaC tooling with real-world examples drawn from ChatGPT and Copilot.
+
 _See the readme file in the main branch for updated instructions and information._
 ## Instructions
 This repository has branches for each of the videos in the course. You can use the branch pop up menu in github to switch to a specific branch and take a look at the course at that stage, or you can add `/tree/BRANCH_NAME` to the URL to go to the branch you want to access.
@@ -20,15 +26,18 @@ To resolve this issue:
     Add changes to git using this command: git add .
 	Commit changes using this command: git commit -m "some message"
 
-## Installing
-1. To use these exercise files, you must have the following installed:
-	- [list of requirements for course]
-2. Clone this repository into your local machine using the terminal (Mac), CMD (Windows), or a GUI tool like SourceTree.
-3. [Course-specific instructions]
+## Instructor
 
+Mike Benkovich
+
+Former Microsoft Evangelist, Current Software Architect
+
+                            
+
+Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learning/instructors/mike-benkovich?u=104).
 
 [0]: # (Replace these placeholder URLs with actual course URLs)
 
-[lil-course-url]: https://www.linkedin.com/learning/
-[lil-thumbnail-url]: http://
+[lil-course-url]: https://www.linkedin.com/learning/azure-infrastructure-as-code-with-arm-bicep-terraform-and-pulumi/
+[lil-thumbnail-url]: https://media.licdn.com/dms/image/v2/D4E0DAQEWO93Zo_ePtw/learning-public-crop_675_1200/learning-public-crop_675_1200/0/1725492062709?e=2147483647&v=beta&t=iIUAPllMmZyvWODWAlGJhiQyM1EDVpssTUElZjaFvwI
 
